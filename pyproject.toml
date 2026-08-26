@@ -1,0 +1,36 @@
+[project]
+name = "forgeai"
+version = "0.1.0"
+description = "ForgeAI monorepo — Autonomous AI Software Engineer"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Apache-2.0" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
+pythonpath = ["apps/api/src", "packages/shared/src"]
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["apps/api/src", "packages/shared/src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "N"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+mypy_path = "apps/api/src,packages/shared/src"
+packages = ["forgeai_api", "forgeai_shared"]
+exclude = ["apps/web", "alembic"]
+
+[[tool.mypy.overrides]]
+module = ["asyncpg", "redis.*"]
+ignore_missing_imports = true
