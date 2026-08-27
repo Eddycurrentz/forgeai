@@ -29,7 +29,7 @@ class Settings(BaseSettings):
         default="postgresql+psycopg://forgeai:forgeai@localhost:5432/forgeai",
         min_length=1,
     )
-    redis_url: RedisDsn = Field(default="redis://localhost:6379/0")
+    redis_url: RedisDsn = Field(default=RedisDsn("redis://localhost:6379/0"))
 
     def async_database_url(self) -> str:
         return self.database_url

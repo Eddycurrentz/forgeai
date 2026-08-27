@@ -4,6 +4,8 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from forgeai_api.api.health import router as health_router
+from forgeai_api.api.repositories import router as repositories_router
+from forgeai_api.api.runs import router as runs_router
 from forgeai_api.core.config import Settings, get_settings
 from forgeai_api.core.db import create_engine, create_session_factory
 from forgeai_api.core.redis import create_redis_client
@@ -34,6 +36,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         lifespan=lifespan,
     )
     application.include_router(health_router)
+    application.include_router(repositories_router)
+    application.include_router(runs_router)
     return application
 
 

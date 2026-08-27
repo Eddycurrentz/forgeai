@@ -5,6 +5,7 @@ from sqlalchemy import engine_from_config, pool
 
 from forgeai_api.core.config import get_settings
 from forgeai_api.core.db import Base
+from forgeai_api import models  # noqa: F401
 
 config = context.config
 

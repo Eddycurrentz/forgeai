@@ -20,13 +20,13 @@ flowchart LR
   Graph --> HITL[Human_approval_later]
 ```
 
-## Phase 1 (implemented)
+## Phase 1 and Phase 2 (implemented)
 
 | Component | Role |
 | --- | --- |
 | `apps/api` | FastAPI process, Pydantic Settings, SQLAlchemy engine/session factory, Redis client, `GET /health` |
 | `apps/web` | Next.js operator shell that displays health |
-| PostgreSQL 16 | System of record (empty schema until Phase 2) |
+| PostgreSQL 16 | System of record for repositories, runs, jobs, and approvals |
 | Redis 7 | Cache/queue substrate (connectivity only) |
 | Alembic | Migration runner wired to `Base.metadata` |
 | `packages/shared` | Shared version/constants |
@@ -56,7 +56,7 @@ No run, plan, or patch endpoints until those phases.
 
 ## Data
 
-Phase 1 defines `DeclarativeBase` and naming conventions only. There are no domain tables. Later expected tables (not created now): repositories, runs, jobs, approvals, code_chunks, traces.
+Phase 2 adds repositories, runs, jobs, and approvals with UUID keys, foreign keys, lifecycle fields, and timestamps. Code chunks and traces remain deferred.
 
 Alembic uses `DATABASE_URL_SYNC` (`postgresql+psycopg`). The API uses `DATABASE_URL` (`postgresql+asyncpg`).
 

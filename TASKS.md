@@ -1,10 +1,10 @@
 # TASKS.md
 
-Phased delivery for ForgeAI. **Phase 1 is in progress / implemented as foundation.** Later phases must not start until the previous phase’s acceptance criteria pass.
+Phased delivery for ForgeAI. **Phase 1 is complete as the project foundation.** Later phases must not start until the previous phase’s acceptance criteria pass.
 
 ---
 
-## Phase 1 — Project foundation
+## Phase 1 — Project foundation (complete)
 
 **Objective:** Runnable monorepo with FastAPI health, Next.js shell, Postgres, Redis, Settings, SQLAlchemy, Alembic, pytest, Ruff, MyPy, and Compose.
 
@@ -23,9 +23,11 @@ Phased delivery for ForgeAI. **Phase 1 is in progress / implemented as foundatio
 - pytest, Ruff, and MyPy run from the repo root.
 - No LangGraph, RAG, sandbox, or Git automation code.
 
+**Validation notes:** The `httpx` test fixture now manages the FastAPI lifespan explicitly, avoiding the removed `ASGITransport(..., lifespan=...)` argument. The Redis default is constructed as `RedisDsn`, keeping MyPy strict-mode validation clean. Docker Compose configuration still requires Docker to be installed for runtime validation.
+
 ---
 
-## Phase 2 — Persistence schema
+## Phase 2 — Persistence schema (complete)
 
 **Objective:** Alembic migrations for repositories, runs, jobs, and approvals.
 
@@ -35,7 +37,7 @@ Phased delivery for ForgeAI. **Phase 1 is in progress / implemented as foundatio
 
 **Tests:** Migration upgrade/downgrade; model round-trip against Postgres.
 
-**Acceptance criteria:** `alembic upgrade head` creates real tables; no dummy columns; foreign keys and timestamps present.
+**Acceptance criteria:** Met. `alembic upgrade head` creates real tables; no dummy columns; foreign keys and timestamps are present.
 
 ---
 
